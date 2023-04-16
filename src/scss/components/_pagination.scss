@@ -1,0 +1,31 @@
+.pagination {
+  display: flex;
+  margin: 0 auto;
+  width: fit-content;
+  padding: 50px 0 80px;
+
+  li {
+    margin-right: 8px;
+    a {
+      font-family: 'Poppins';
+      font-weight: 400;
+      font-size: 18px;
+      transition: all 0.4s ease-in-out;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+    &:hover {
+      a {
+        color: $black;
+      }
+    }
+    &.selected {
+      a {
+        color: $black;
+        text-decoration: underline;
+        margin: 0 10px 0 10px;
+      }
+    }
+  }
+}

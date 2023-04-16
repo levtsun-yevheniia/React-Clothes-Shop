@@ -1,0 +1,81 @@
+.first {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  &__block {
+    display: block;
+    width: 70%;
+    height: 70%;
+    margin: 10% auto;
+    position: relative;
+    .block_img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0%;
+      transition: opacity 0.9s ease-in;
+
+      &.active {
+        opacity: 100%;
+      }
+    }
+    .title {
+      position: absolute;
+      top: 30%;
+      left: 50%;
+      z-index: 1;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      display: block;
+      opacity: 0;
+      transition: all 0.8s ease-out;
+      transition-delay: 1s;
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      &.active {
+        top: 48%;
+        opacity: 100%;
+      }
+    }
+    .text {
+      position: absolute;
+      top: 70%;
+      left: 50%;
+      z-index: 1;
+      transform: translate(-50%, -20%);
+      font-size: 20px;
+      font-weight: 400;
+      color: white;
+      text-align: center;
+      margin: 0 auto;
+      width: 40%;
+      opacity: 0;
+      transition: all 0.7s ease-out;
+      transition-delay: 1s;
+
+      &.active {
+        top: 78%;
+        opacity: 100%;
+      }
+    }
+  }
+  &__arrow {
+    position: absolute;
+    top: 70%;
+    right: 5%;
+    opacity: 0;
+    transition: all 0.8s ease-out;
+    transition-delay: 1.2s;
+
+    &.active {
+      top: 82%;
+      opacity: 100%;
+    }
+  }
+}

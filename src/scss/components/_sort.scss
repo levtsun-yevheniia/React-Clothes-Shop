@@ -1,0 +1,73 @@
+@import '../variables';
+
+.sort {
+  position: relative;
+  margin-left: auto;
+  padding-right: 15px;
+  &__label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    &__choise {
+      display: flex;
+      align-items: center;
+    }
+
+    .triangle {
+      margin-left: 8px;
+      transform: translateY(2px);
+
+      &--active {
+        transform: rotate(180deg);
+      }
+    }
+
+    b {
+      margin-right: 8px;
+    }
+
+    span {
+      color: $red;
+      cursor: pointer;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 7px solid $black;
+    }
+  }
+
+  &__popup {
+    position: absolute;
+    right: 0;
+    margin-top: 15px;
+    background: #ffffff;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.09);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 10px 0;
+    width: 160px;
+
+    ul {
+      overflow: hidden;
+      li {
+        padding: 12px 20px;
+        cursor: pointer;
+
+        &.active,
+        &:hover {
+          background: rgba(254, 95, 30, 0.05);
+        }
+
+        &.active {
+          font-weight: bold;
+          color: $red;
+        }
+      }
+    }
+  }
+}
