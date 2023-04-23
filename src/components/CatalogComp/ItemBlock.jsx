@@ -14,7 +14,11 @@ function ItemBlock({ title, price, imageUrl, sizes, types, images }) {
       <div className="item-block__selector">
         <ul className="colors">
           {types.map((typeId, i) => (
-            <li onClick={() => setActiveType(i)} className={activeType === i ? 'active' : ''}>
+            <li
+              key={i}
+              onClick={() => setActiveType(i)}
+              className={activeType === i ? 'active' : ''}
+            >
               {' '}
               <div className="colors_circle">
                 <div className={typeNames[typeId]}></div>
@@ -25,7 +29,11 @@ function ItemBlock({ title, price, imageUrl, sizes, types, images }) {
 
         <ul className="list list--second">
           {sizes.map((size, i) => (
-            <li onClick={() => setActiveSize(i)} className={activeSize === i ? 'active' : ''}>
+            <li
+              key={i}
+              onClick={() => setActiveSize(i)}
+              className={activeSize === i ? 'active' : ''}
+            >
               {' '}
               {size}
             </li>

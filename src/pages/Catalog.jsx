@@ -15,10 +15,11 @@ function Catalog({ searchValue }) {
   const [currentPage, setCurrentPage] = React.useState(0);
 
   const itemsPerPage = 4;
-  const [itemOffset, setItemOffset] = React.useState(0);
+  const itemOffset = currentPage * itemsPerPage;
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
+  console.log('рендер');
 
   React.useEffect(() => {
     // setLoading(true);
@@ -35,8 +36,10 @@ function Catalog({ searchValue }) {
       .then((arr) => {
         setItems(arr);
       });
+    console.log('ussEff');
+    setCurrentPage(0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [categoryId, sortType, searchValue, currentPage]);
+  }, [categoryId, sortType, searchValue]);
 
   const search_items_result = currentItems
     .filter((obj) => {
@@ -49,23 +52,17 @@ function Catalog({ searchValue }) {
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
-    const newOffset = (selected * itemsPerPage) % items.length;
-    setItemOffset(newOffset);
-  };
-
-  const handleResetClick = () => {
-    setItemOffset(0);
-    setCurrentPage(0);
+    console.log('смена странички');
   };
 
   const changeCategory = (i) => {
     setCategoryId(i);
-    handleResetClick();
+    console.log('смена категории');
   };
 
   const changeSort = (i) => {
     setSortType(i);
-    handleResetClick();
+    console.log('смена сортировки');
   };
 
   return (
@@ -82,17 +79,18 @@ function Catalog({ searchValue }) {
         <div className="container__items">{search_items_result}</div>
       </div>
 
-      <ReactPaginate
-        className="pagination"
-        breakLabel="..."
-        nextLabel=">"
-        onPageChange={handlePageClick}
-        forcePage={currentPage}
-        pageRangeDisplayed={5}
-        pageCount={pageCount}
-        previousLabel="<"
-        renderOnZeroPageCount={null}
-      />
+      {pageCount > 0 && (
+        <ReactPaginate
+          className="pagination"
+          breakLabel="..."
+          nextLabel=">"
+          onPageChange={handlePageClick}
+          forcePage={currentPage}
+          pageRangeDisplayed={5}
+          pageCount={pageCount}
+          previousLabel="<"
+        />
+      )}
     </div>
   );
 }

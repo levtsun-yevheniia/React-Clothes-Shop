@@ -65,6 +65,7 @@ function Sort({ value, onChangeSort }) {
           <ul>
             {list.map((obj, i) => (
               <li
+                key={i}
                 onClick={() => onClickListItem(obj)}
                 className={value.sortProperty === obj.sortProperty ? 'active' : ''}
               >
