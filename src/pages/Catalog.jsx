@@ -21,8 +21,7 @@ function Catalog({ searchValue }) {
   const pageCount = Math.ceil(items.length / itemsPerPage);
   console.log('рендер');
 
-  React.useEffect(() => {
-    // setLoading(true);
+  const fetchItems = React.useCallback(() => {
     const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.sortProperty.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
@@ -36,10 +35,14 @@ function Catalog({ searchValue }) {
       .then((arr) => {
         setItems(arr);
       });
-    console.log('ussEff');
+  }, [categoryId, sortType.sortProperty, searchValue]);
+
+  React.useEffect(() => {
+    // setLoading(true);
+    fetchItems();
     setCurrentPage(0);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [categoryId, sortType, searchValue]);
+  }, [fetchItems]);
 
   const search_items_result = currentItems
     .filter((obj) => {
@@ -52,17 +55,14 @@ function Catalog({ searchValue }) {
 
   const handlePageClick = ({ selected }) => {
     setCurrentPage(selected);
-    console.log('смена странички');
   };
 
   const changeCategory = (i) => {
     setCategoryId(i);
-    console.log('смена категории');
   };
 
   const changeSort = (i) => {
     setSortType(i);
-    console.log('смена сортировки');
   };
 
   return (
