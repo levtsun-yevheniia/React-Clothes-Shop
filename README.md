@@ -20,7 +20,7 @@
 
 
 :white_check_mark: Two pages "Main" and "Catalog"     
-:white_check_mark: Sorting and Filtering    
+:white_check_mark: Sorting and Filtering using Redux    
 :white_check_mark: Searching    
 :white_check_mark: Pagination    
 :white_check_mark: Getting data from the backend    
