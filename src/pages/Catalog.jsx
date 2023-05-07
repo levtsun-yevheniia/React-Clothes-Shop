@@ -5,13 +5,24 @@ import ItemBlock from '../components/CatalogComp/ItemBlock';
 import React from 'react';
 import ReactPaginate from 'react-paginate';
 
+import { useSelector, useDispatch } from 'react-redux';
+import { setCategoryId } from '../redux/slices/filterSlice';
+
 function Catalog({ searchValue }) {
   let [items, setItems] = React.useState([]);
-  const [categoryId, setCategoryId] = React.useState(0);
-  const [sortType, setSortType] = React.useState({
-    name: 'popularity',
-    sortProperty: 'rating',
-  });
+  // const [categoryId, setCategoryId] = React.useState(0);
+  // const [sortType, setSortType] = React.useState({
+  //   name: 'popularity',
+  //   sortProperty: 'rating',
+  // });                                         replaced by ReduxToolkit
+  const dispatch = useDispatch();
+  const { categoryId, sort } = useSelector((state) => state.filter);
+  const sortType = sort.sortProperty;
+
+  const onChangeCategory = (id) => {
+    dispatch(setCategoryId(id));
+  };
+
   const [currentPage, setCurrentPage] = React.useState(0);
 
   const itemsPerPage = 4;
@@ -22,8 +33,8 @@ function Catalog({ searchValue }) {
   console.log('рендер');
 
   const fetchItems = React.useCallback(() => {
-    const order = sortType.sortProperty.includes('-') ? 'asc' : 'desc';
-    const sortBy = sortType.sortProperty.replace('-', '');
+    const order = sortType.includes('-') ? 'asc' : 'desc';
+    const sortBy = sortType.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
     fetch(
@@ -35,7 +46,7 @@ function Catalog({ searchValue }) {
       .then((arr) => {
         setItems(arr);
       });
-  }, [categoryId, sortType.sortProperty, searchValue]);
+  }, [categoryId, sortType, searchValue]);
 
   React.useEffect(() => {
     // setLoading(true);
@@ -57,14 +68,6 @@ function Catalog({ searchValue }) {
     setCurrentPage(selected);
   };
 
-  const changeCategory = (i) => {
-    setCategoryId(i);
-  };
-
-  const changeSort = (i) => {
-    setSortType(i);
-  };
-
   return (
     <div className="container">
       <div className="container__indent"></div>
@@ -72,10 +75,10 @@ function Catalog({ searchValue }) {
         <h1>Catalog</h1>
       </div>
       <div className="container__top">
-        <Sort value={sortType} onChangeSort={(i) => changeSort(i)} />
+        <Sort />
       </div>
       <div className="container__body">
-        <Categories value={categoryId} onChangeCategory={(i) => changeCategory(i)} />
+        <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         <div className="container__items">{search_items_result}</div>
       </div>
 
