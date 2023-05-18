@@ -10,12 +10,10 @@ function Sort() {
   const [triangle, setTriangle] = React.useState(false);
 
   const list = [
-    { name: 'popularity(DESC)', sortProperty: 'rating' },
-    { name: 'popularity(ASC)', sortProperty: '-rating' },
-    { name: 'price (DESC)', sortProperty: 'price' },
-    { name: 'price(ASC)', sortProperty: '-price' },
-    { name: 'alphabet(DESC)', sortProperty: 'title' },
-    { name: 'alphabet(ASC)', sortProperty: '-title' },
+    { name: 'top rated', sortProperty: 'rating' },
+    { name: 'price Low to High', sortProperty: 'price' },
+    { name: 'price High to Low', sortProperty: '-price' },
+    { name: 'alphabet', sortProperty: 'title' },
   ];
 
   const onClickLabel = () => {
@@ -24,6 +22,7 @@ function Sort() {
   };
 
   const onClickListItem = (obj) => {
+    setOpen(!open);
     dispatch(setSort(obj));
     setTriangle(false);
   };

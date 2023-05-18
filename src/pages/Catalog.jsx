@@ -30,7 +30,7 @@ function Catalog({ searchValue }) {
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
-  console.log('рендер');
+  console.log('render');
 
   const fetchItems = React.useCallback(() => {
     const order = sortType.includes('-') ? 'asc' : 'desc';

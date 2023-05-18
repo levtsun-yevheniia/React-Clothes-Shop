@@ -20,7 +20,7 @@ function ItemBlock({ title, price, imageUrl, sizes, types, images }) {
               className={activeType === i ? 'active' : ''}
             >
               {' '}
-              <div className="colors_circle">
+              <div className="color_block">
                 <div className={typeNames[typeId]}></div>
               </div>
             </li>
