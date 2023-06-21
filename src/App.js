@@ -35,7 +35,7 @@ function App() {
     }, [ref]);
 
     return ref;
-  }; //clearing the search field when clicking outside the field
+  }; //clearing the search field when we have click outside the field
 
   const searchcomp = useOutsideClick(handleClickOutside);
 

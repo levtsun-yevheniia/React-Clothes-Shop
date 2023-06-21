@@ -1,26 +1,29 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { setSort } from '../../redux/slices/filterSlice';
 
-function Sort({ value, onChangeSort }) {
+const list = [
+  { name: 'top rated', sortProperty: 'rating' },
+  { name: 'price High to Low', sortProperty: 'price' },
+  { name: 'price Low to High', sortProperty: '-price' },
+  { name: 'alphabet', sortProperty: '-title' },
+];
+
+function Sort() {
+  const dispatch = useDispatch();
+  const sort = useSelector((state) => state.filter.sort);
+
   const [open, setOpen] = React.useState(false);
   const [triangle, setTriangle] = React.useState(false);
-
-  const list = [
-    { name: 'popularity(DESC)', sortProperty: 'rating' },
-    { name: 'popularity(ASC)', sortProperty: '-rating' },
-    { name: 'price (DESC)', sortProperty: 'price' },
-    { name: 'price(ASC)', sortProperty: '-price' },
-    { name: 'alphabet(DESC)', sortProperty: 'title' },
-    { name: 'alphabet(ASK)', sortProperty: '-title' },
-  ];
 
   const onClickLabel = () => {
     setOpen(!open);
     setTriangle(!triangle);
   };
 
-  const onClickListItem = (i) => {
-    onChangeSort(i);
-    setOpen(false);
+  const onClickListItem = (obj) => {
+    setOpen(!open);
+    dispatch(setSort(obj));
     setTriangle(false);
   };
 
@@ -56,7 +59,7 @@ function Sort({ value, onChangeSort }) {
       <div className="sort__label">
         <b>Sort by:</b>
         <div onClick={() => onClickLabel()} className="sort__label__choise">
-          <span>{value.name}</span>
+          <span>{sort.name}</span>
           <div className={triangle === true ? 'triangle triangle--active' : 'triangle'}></div>
         </div>
       </div>
@@ -65,8 +68,9 @@ function Sort({ value, onChangeSort }) {
           <ul>
             {list.map((obj, i) => (
               <li
+                key={i}
                 onClick={() => onClickListItem(obj)}
-                className={value.sortProperty === obj.sortProperty ? 'active' : ''}
+                className={sort.sortProperty === obj.sortProperty ? 'active' : ''}
               >
                 {' '}
                 {obj.name}
