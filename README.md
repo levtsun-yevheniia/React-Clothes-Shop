@@ -6,10 +6,10 @@
 * ### TypeScript
 * ### React Content Loader
 * ### React Pagination
-* ### Redux Toolkit
+* ### Redux Toolkit (for sort and filter)
 * ### React Hooks; PropsDrilling; Context; Forwarding Refs
 * ### MockApi (to keep data, and preform operations on it using RESTful interface)
-* ### Fetch (sending a request to the backend)
+* ### Fetch (now it's Axios) (sending a request to the backend)
 * ### Prettier
 * ### CSS-Modules / SCSS    
 
