@@ -3,11 +3,11 @@ import Sort from '../components/CatalogComp/Sort';
 import ItemBlock from '../components/CatalogComp/ItemBlock';
 
 import React from 'react';
-import ReactPaginate from 'react-paginate';
 import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId } from '../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import Pagination from '../components/CatalogComp/Pagination';
 
 function Catalog({ searchValue }) {
   let [items, setItems] = React.useState([]);
@@ -18,14 +18,18 @@ function Catalog({ searchValue }) {
   // });                                         replaced by ReduxToolkit
 
   const dispatch = useDispatch();
-  const { categoryId, sort } = useSelector((state) => state.filter);
+  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
   const sortType = sort.sortProperty;
 
   const onChangeCategory = (id) => {
     dispatch(setCategoryId(id));
   };
 
-  const [currentPage, setCurrentPage] = React.useState(0);
+  // const [currentPage, setCurrentPage] = React.useState(0);  replaced by ReduxToolkit
+
+  const onPageChange = ({ selected }) => {
+    dispatch(setCurrentPage(selected));
+  };
 
   const itemsPerPage = 4;
   const itemOffset = currentPage * itemsPerPage;
@@ -60,7 +64,7 @@ function Catalog({ searchValue }) {
   React.useEffect(() => {
     // setLoading(true);
     fetchItems();
-    setCurrentPage(0);
+    dispatch(setCurrentPage(0));
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [fetchItems]);
 
@@ -72,10 +76,6 @@ function Catalog({ searchValue }) {
       return false;
     })
     .map((obj) => <ItemBlock key={obj.id} {...obj} />);
-
-  const handlePageClick = ({ selected }) => {
-    setCurrentPage(selected);
-  };
 
   return (
     <div className="container">
@@ -92,16 +92,11 @@ function Catalog({ searchValue }) {
       </div>
 
       {pageCount > 0 && (
-        <ReactPaginate
-          className="pagination"
-          breakLabel="..."
-          nextLabel=">"
-          onPageChange={handlePageClick}
-          forcePage={currentPage}
-          pageRangeDisplayed={5}
+        <Pagination
+          onChangePage={onPageChange}
           pageCount={pageCount}
-          previousLabel="<"
-        />
+          currentPage={currentPage}
+        ></Pagination>
       )}
     </div>
   );
