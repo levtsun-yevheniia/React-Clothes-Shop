@@ -4,6 +4,7 @@ import ItemBlock from '../components/CatalogComp/ItemBlock';
 
 import React from 'react';
 import ReactPaginate from 'react-paginate';
+import axios from 'axios';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId } from '../redux/slices/filterSlice';
@@ -15,6 +16,7 @@ function Catalog({ searchValue }) {
   //   name: 'popularity',
   //   sortProperty: 'rating',
   // });                                         replaced by ReduxToolkit
+
   const dispatch = useDispatch();
   const { categoryId, sort } = useSelector((state) => state.filter);
   const sortType = sort.sortProperty;
@@ -45,6 +47,13 @@ function Catalog({ searchValue }) {
       })
       .then((arr) => {
         setItems(arr);
+      });
+    axios
+      .get(
+        `https://63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
+      )
+      .then((res) => {
+        setItems(res.data);
       });
   }, [categoryId, sortType, searchValue]);
 

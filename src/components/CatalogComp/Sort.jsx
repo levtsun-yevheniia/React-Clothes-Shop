@@ -2,19 +2,19 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../../redux/slices/filterSlice';
 
+const list = [
+  { name: 'top rated', sortProperty: 'rating' },
+  { name: 'price High to Low', sortProperty: 'price' },
+  { name: 'price Low to High', sortProperty: '-price' },
+  { name: 'alphabet', sortProperty: '-title' },
+];
+
 function Sort() {
   const dispatch = useDispatch();
   const sort = useSelector((state) => state.filter.sort);
 
   const [open, setOpen] = React.useState(false);
   const [triangle, setTriangle] = React.useState(false);
-
-  const list = [
-    { name: 'top rated', sortProperty: 'rating' },
-    { name: 'price Low to High', sortProperty: 'price' },
-    { name: 'price High to Low', sortProperty: '-price' },
-    { name: 'alphabet', sortProperty: 'title' },
-  ];
 
   const onClickLabel = () => {
     setOpen(!open);
