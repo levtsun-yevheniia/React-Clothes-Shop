@@ -84,3 +84,4 @@ function Sort() {
 }
 
 export default Sort;
+export { list };

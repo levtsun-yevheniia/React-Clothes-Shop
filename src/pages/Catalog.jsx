@@ -4,10 +4,14 @@ import ItemBlock from '../components/CatalogComp/ItemBlock';
 
 import React from 'react';
 import axios from 'axios';
+import qs from 'qs';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { setCategoryId, setCurrentPage } from '../redux/slices/filterSlice';
+import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import Pagination from '../components/CatalogComp/Pagination';
+import { useNavigate } from 'react-router-dom';
+
+import { list } from '../components/CatalogComp/Sort';
 
 function Catalog({ searchValue }) {
   let [items, setItems] = React.useState([]);
@@ -18,6 +22,9 @@ function Catalog({ searchValue }) {
   // });                                         replaced by ReduxToolkit
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const isSearch = React.useRef(false);
+  const isMounted = React.useRef(false);
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
   const sortType = sort.sortProperty;
 
@@ -38,20 +45,11 @@ function Catalog({ searchValue }) {
   const pageCount = Math.ceil(items.length / itemsPerPage);
   console.log('render');
 
-  const fetchItems = React.useCallback(() => {
+  const fetchItems = () => {
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
-    fetch(
-      `https://63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
-    )
-      .then((res) => {
-        return res.json();
-      })
-      .then((arr) => {
-        setItems(arr);
-      });
     axios
       .get(
         `https://63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
@@ -59,14 +57,51 @@ function Catalog({ searchValue }) {
       .then((res) => {
         setItems(res.data);
       });
+  };
+
+  React.useEffect(() => {
+    console.log('u1');
+    if (window.location.search) {
+      const params = qs.parse(window.location.search.substring(1));
+      const sort = list.find((obj) => obj.sortProperty === params.sortType);
+      if (params.sortType == 'rating' && params.categoryId == 0 && params.currentPage == 0) {
+        fetchItems();
+      }
+      console.log('took data from the search string and passed it to the parameters');
+      dispatch(
+        setFilters({
+          ...params,
+          sort,
+        }),
+      );
+      isSearch.current = true;
+    }
+  }, []);
+
+  React.useEffect(() => {
+    console.log('u2');
+    // setLoading(true);
+    if (!isSearch.current) {
+      fetchItems();
+    }
+    isSearch.current = false;
+    dispatch(setCurrentPage(0));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [categoryId, sortType, searchValue]);
 
   React.useEffect(() => {
-    // setLoading(true);
-    fetchItems();
-    dispatch(setCurrentPage(0));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [fetchItems]);
+    console.log('u3');
+    if (isMounted.current) {
+      const queryString = qs.stringify({
+        sortType,
+        categoryId,
+        currentPage,
+      });
+      navigate(`?${queryString}`);
+      console.log('put data to url');
+    }
+    isMounted.current = true;
+  }, [categoryId, sortType, currentPage]);
 
   const search_items_result = currentItems
     .filter((obj) => {
