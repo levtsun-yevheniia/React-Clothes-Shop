@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import Search from './Search';
-import { SearchContext } from '../App';
 
 import logo from '../assets/img/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,7 +9,6 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 function Header() {
   const [loading, setLoading] = React.useState(false);
-  const { searchcomp } = React.useContext(SearchContext);
   const isFixed = useFixedHeader();
 
   React.useEffect(() => {
@@ -57,7 +55,7 @@ function Header() {
         </div>
 
         <div className="header__icons">
-          <div ref={searchcomp} className={loading === true ? 'search active' : 'search'}>
+          <div className={loading === true ? 'search active' : 'search'}>
             {' '}
             <Search />
           </div>

@@ -13,7 +13,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { list } from '../components/CatalogComp/Sort';
 
-function Catalog({ searchValue }) {
+function Catalog() {
   let [items, setItems] = React.useState([]);
   // const [categoryId, setCategoryId] = React.useState(0);
   // const [sortType, setSortType] = React.useState({
@@ -26,6 +26,9 @@ function Catalog({ searchValue }) {
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+
+  const searchValue = useSelector((state) => state.search.searchValue);
+
   const sortType = sort.sortProperty;
 
   const onChangeCategory = (id) => {
