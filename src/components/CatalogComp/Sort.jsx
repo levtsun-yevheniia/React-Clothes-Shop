@@ -52,10 +52,10 @@ function Sort() {
     return ref;
   };
 
-  const sortcomp = useOutsideClick(handleClickOutside);
+  const sortRef = useOutsideClick(handleClickOutside);
 
   return (
-    <div ref={sortcomp} className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <b>Sort by:</b>
         <div onClick={() => onClickLabel()} className="sort__label__choise">

@@ -13,12 +13,12 @@
           color: $red;
           font-size: 22px;
           font-weight: bold;
-          margin-right: 30px;
+          margin-right: 48px;
           &:first-child {
             margin: 0 auto 0 30px;
           }
           &:last-child {
-            margin-right: 70px;
+            margin-right: 56px;
           }
         }
       }
@@ -64,7 +64,7 @@
               width: 20px;
               height: 20px;
               margin-top: 5px;
-              // transition: all 12ms linear;
+              border: 1px solid $red;
               .black {
                 width: 100%;
                 height: 100%;
@@ -91,8 +91,10 @@
             }
           }
           .price {
+            width: 100px;
+            text-align: right;
             padding: 0 15px;
-            margin: 0 32px auto;
+            margin-right: 18px;
             p {
               font-weight: 500;
             }
@@ -119,6 +121,26 @@
     .content__other {
       display: flex;
       flex-direction: column;
+      .emptycart {
+        display: flex;
+        align-items: center;
+        padding: 0 10px 5px 0;
+        margin-left: auto;
+        &__text {
+          background-color: white;
+          padding-right: 5px;
+          border: none;
+          text-align: right;
+          width: auto;
+          color: $red;
+          font-family: 'Cormorant';
+          font-weight: 400;
+          font-size: 20px;
+        }
+        &__svg {
+          fill: $red;
+        }
+      }
       .subtotal {
         border: 1px solid rgb(145, 145, 145);
         padding: 20px 30px;
@@ -179,16 +201,18 @@
         .continue {
           background-color: white;
           border: 1px solid $black;
-          color: $black;
           cursor: pointer;
           display: inline-block;
-          font-family: 'Poppins';
-          font-weight: 400;
-          font-size: 18px;
           padding: 13px 23px;
           text-align: center;
           width: 100%;
           margin-top: 15px;
+          .continuelink {
+            color: $black;
+            font-family: 'Poppins';
+            font-weight: 400;
+            font-size: 18px;
+          }
         }
       }
     }

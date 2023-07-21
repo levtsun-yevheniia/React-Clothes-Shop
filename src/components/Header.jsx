@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import Search from './Search';
+import { useSelector } from 'react-redux';
 
 import logo from '../assets/img/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +11,7 @@ import { faUser } from '@fortawesome/free-solid-svg-icons';
 function Header() {
   const [loading, setLoading] = React.useState(false);
   const isFixed = useFixedHeader();
+  const { totalPrice, totalCount } = useSelector((state) => state.cart);
 
   React.useEffect(() => {
     setLoading(true);
@@ -41,7 +43,7 @@ function Header() {
       <div className="container">
         <Link to="/">
           <div className={loading === true ? 'header__logo active' : 'header__logo'}>
-            <img strokeWidth="38" src={logo} alt="Pizza logo" />
+            <img strokeWidth="38" src={logo} alt="Logo" />
           </div>
         </Link>
 
@@ -68,10 +70,10 @@ function Header() {
             to="/cart"
             className={loading === true ? 'button button--cart active' : 'button button--cart'}
           >
-            <span>520 ₽</span>
+            <span>{totalPrice} $</span>
             <div className="button__delimiter"></div>
             <FontAwesomeIcon icon={faCartShopping}></FontAwesomeIcon>
-            <span>3</span>
+            <span>{totalCount}</span>
           </Link>
         </div>
       </div>

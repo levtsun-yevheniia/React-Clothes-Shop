@@ -12,7 +12,6 @@ const Search = () => {
 
   const handleClickOutside = () => {
     dispatch(setSearchValue(''));
-    console.log('outside');
   };
 
   const useOutsideClick = (callback) => {
