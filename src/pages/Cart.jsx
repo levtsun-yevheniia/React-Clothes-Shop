@@ -31,7 +31,7 @@ function Cart() {
             </ul>
             <div className="line"></div>
             {items.map((item) => (
-              <CartItem key={item.id} {...item} />
+              <CartItem key={item.id + item.size + item.type} {...item} />
             ))}
             <div className="line line--lighter"></div>
           </div>

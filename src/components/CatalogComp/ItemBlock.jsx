@@ -9,8 +9,15 @@ function ItemBlock({ id, title, price, imageUrl, sizes, types }) {
   const typeNames = ['white', 'black', 'blue'];
 
   const dispatch = useDispatch();
-  const cartItem = useSelector((state) => state.cart.items.find((obj) => obj.id === id));
-  const addedCount = cartItem ? cartItem.count : 0;
+  const cartItems = useSelector((state) => state.cart.items.filter((obj) => obj.id === id));
+
+  let addedCount;
+
+  if (cartItems.length !== 0) {
+    addedCount = cartItems.reduce((sum, item) => sum + item.count, 0);
+  } else {
+    addedCount = 0;
+  }
 
   const onClickAdd = () => {
     const item = {
