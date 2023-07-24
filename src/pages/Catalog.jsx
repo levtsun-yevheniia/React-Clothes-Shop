@@ -15,11 +15,6 @@ import { list } from '../components/CatalogComp/Sort';
 
 function Catalog() {
   let [items, setItems] = React.useState([]);
-  // const [categoryId, setCategoryId] = React.useState(0);
-  // const [sortType, setSortType] = React.useState({
-  //   name: 'popularity',
-  //   sortProperty: 'rating',
-  // });                                         replaced by ReduxToolkit
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -35,8 +30,6 @@ function Catalog() {
     dispatch(setCategoryId(id));
   };
 
-  // const [currentPage, setCurrentPage] = React.useState(0);  replaced by ReduxToolkit
-
   const onPageChange = ({ selected }) => {
     dispatch(setCurrentPage(selected));
   };
@@ -46,7 +39,6 @@ function Catalog() {
   const endOffset = itemOffset + itemsPerPage;
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
-  console.log('render');
 
   const fetchItems = () => {
     const order = sortType.includes('-') ? 'asc' : 'desc';
@@ -64,6 +56,7 @@ function Catalog() {
 
   React.useEffect(() => {
     console.log('u1');
+
     if (window.location.search) {
       const params = qs.parse(window.location.search.substring(1));
       const sort = list.find((obj) => obj.sortProperty === params.sortType);

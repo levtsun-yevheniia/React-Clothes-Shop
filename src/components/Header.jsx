@@ -22,7 +22,19 @@ function Header() {
 
     React.useEffect(() => {
       function handleScroll() {
-        if (window.pageYOffset > 750) {
+        const catalogCheck = /\/catalog\b/;
+        const cartCheck = /\/cart\b/;
+
+        if (
+          (catalogCheck.test(window.location.href) || cartCheck.test(window.location.href)) &&
+          window.pageYOffset > 200
+        ) {
+          setIsFixed(true);
+        } else if (
+          !catalogCheck.test(window.location.href) &&
+          !cartCheck.test(window.location.href) &&
+          window.pageYOffset > 750
+        ) {
           setIsFixed(true);
         } else {
           setIsFixed(false);
