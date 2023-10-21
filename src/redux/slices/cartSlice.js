@@ -45,17 +45,53 @@ const cartSlice = createSlice({
         state.totalPrice -= findItem.price;
       }
     },
+    // remoweItem(state, action) {
+    //   state.items = state.items.filter((obj) => {
+    //     return (
+    //       obj.id !== action.payload && obj.size !== action.payload && obj.type !== action.payload
+    //     );
+    //   });
+    //   state.totalCount = state.items.reduce((sum, item) => sum + item.count, 0);
+    //   state.totalPrice = state.items.reduce((sum, obj) => {
+    //     return obj.price * obj.count + sum;
+    //   }, 0);
+    // },
     remoweItem(state, action) {
-      state.items = state.items.filter((obj) => {
+      let toRemove = [];
+      toRemove = state.items.filter((obj) => {
         return (
-          obj.id !== action.payload && obj.size !== action.payload && obj.type !== action.payload
+          obj.id === action.payload.id &&
+          obj.size === action.payload.size &&
+          obj.type === action.payload.type
         );
       });
+
+      const indexesToRemove = toRemove.map((obj) => {
+        return state.items.findIndex((item) => {
+          return item.id === obj.id && item.size === obj.size && item.type === obj.type;
+        });
+      });
+
+      indexesToRemove.forEach((indexToRemove) => {
+        if (indexToRemove >= 0 && indexToRemove < state.items.length) {
+          state.items.splice(indexToRemove, 1);
+        }
+      });
+
       state.totalCount = state.items.reduce((sum, item) => sum + item.count, 0);
       state.totalPrice = state.items.reduce((sum, obj) => {
         return obj.price * obj.count + sum;
       }, 0);
+
+      // state.totalPrice -= indexesToRemove.reduce((sum, index) => {
+      //   if (index >= 0 && index < state.indexesToRemove.length) {
+      //     return sum + state.indexesToRemove[index].price;
+      //   }
+      //   return sum;
+      // }, 0);
+      // state.totalCount = state.items.reduce((sum, item) => sum + item.count, 0);
     },
+
     clearItems(state) {
       state.items = [];
       state.totalCount = 0;

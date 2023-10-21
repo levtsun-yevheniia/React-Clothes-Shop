@@ -40,18 +40,20 @@ function Catalog() {
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
-  const fetchItems = () => {
+  const fetchItems = async () => {
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
-    axios
-      .get(
+
+    try {
+      const res = await axios.get(
         `https://63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
-      )
-      .then((res) => {
-        setItems(res.data);
-      });
+      );
+      setItems(res.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   React.useEffect(() => {
