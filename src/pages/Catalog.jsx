@@ -3,7 +3,6 @@ import Sort from '../components/CatalogComp/Sort';
 import ItemBlock from '../components/CatalogComp/ItemBlock';
 
 import React from 'react';
-import axios from 'axios';
 import qs from 'qs';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -12,14 +11,17 @@ import Pagination from '../components/CatalogComp/Pagination';
 import { useNavigate } from 'react-router-dom';
 
 import { list } from '../components/CatalogComp/Sort';
+import { fetchItems } from '../redux/slices/itemsSlice';
 
 function Catalog() {
-  let [items, setItems] = React.useState([]);
+  // let [items, setItems] = React.useState([]); replaced with Redux
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
+
+  const { items, status } = useSelector((state) => state.items);
   const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
 
   const searchValue = useSelector((state) => state.search.searchValue);
@@ -40,20 +42,20 @@ function Catalog() {
   const currentItems = items.slice(itemOffset, endOffset);
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
-  const fetchItems = async () => {
+  const getItems = async () => {
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    try {
-      const res = await axios.get(
-        `https://63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
-      );
-      setItems(res.data);
-    } catch (error) {
-      console.log(error);
-    }
+    dispatch(
+      fetchItems({
+        order,
+        sortBy,
+        category,
+        search,
+      }),
+    );
   };
 
   React.useEffect(() => {
@@ -63,7 +65,7 @@ function Catalog() {
       const params = qs.parse(window.location.search.substring(1));
       const sort = list.find((obj) => obj.sortProperty === params.sortType);
       if (params.sortType == 'rating' && params.categoryId == 0 && params.currentPage == 0) {
-        fetchItems();
+        getItems();
       }
       console.log('took data from the search string and passed it to the parameters');
       dispatch(
@@ -80,7 +82,7 @@ function Catalog() {
     console.log('u2');
     // setLoading(true);
     if (!isSearch.current) {
-      fetchItems();
+      getItems();
     }
     isSearch.current = false;
     dispatch(setCurrentPage(0));
@@ -121,7 +123,13 @@ function Catalog() {
       </div>
       <div className="container__body">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        <div className="container__items">{search_items_result}</div>
+        {status === 'error' ? (
+          <div className="container__error-message">
+            <h4>Sorry, but we didn't find any items for you</h4>
+          </div>
+        ) : (
+          <div className="container__items">{search_items_result}</div>
+        )}
       </div>
 
       {pageCount > 0 && (
