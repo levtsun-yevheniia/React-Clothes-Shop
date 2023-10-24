@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+<h1 align="center">React Web Application for an Online Clothing Store</h1><br>
+<strong> Introduction: </strong> <br>
+This is a full-fledged React web application created using a variety of technologies that  make it convenient, beautiful and functional.
+<h2> Key Features: </h2>
+<ul>
+  &#9989; Convenient and intuitive interface<br>
+  &#9989; Product catalog page with basic animation<br>
+  &#9989; Sorting by category and filtering by alphabet, price and rating<br>
+  &#9989; Product search<br>
+  &#9989; Convenient site navigation without reloading<br>
+  &#9989; Interaction with the backend, sending requests to the backend<br>
+  &#9989; Global data store for the entire application<br>
+  &#9989; Storing filtering parameter data in the URL for user convenience<br>
+  &#9989; The cart functionality is fully implemented<br>
+</ul>
+New features are on the way!<span style="font-size: 24px;">&#128640;</span>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Technologies:</h2>
+<ul>
+  <li>ReactJS 18</li>
+  <li>Redux Toolkit (Data storage, Asynchronous actions)</li>
+  <li>TypeScript</li>
+  <li>Axios (Sending requests to the backend)</li>
+  <li>React Hooks (useState, useEffect, useContext, useSelector, useDispatch)</li>
+  <li>SCSS</li>
+  <li>React Router v6 (Navigation)</li>
+  <li>React Pagination (Pagination)</li>
+  <li>Also, in the early stages of the project, Context, Props Drilling, Fetch were used.</li>
+</ul>
 
-## Available Scripts
+<h2> By working on this project, I have gained the following: </h2>
+<ul>
+  <li>Experience in creating a full-fledged application (architecture planning, designing and development at all stages)</li>
+  <li>The ability to create components, pages, sorting, search, pagination, filtering, popup windows, and more.</li>
+  <li>Experience in interacting with the backend, including making requests to the server.</li>
+  <li>Skills in implementing seamless page navigation without the need for full page reloads.</li>
+  <li>Expertise in creating a global data store in Redux Toolkit for the entire application.</li>
+  <li>The ability to write strictly typed code using TypeScript.</li>
+  <li>Insights into optimizing component re-renders, code splitting for splitting code into separate JS files, understanding tree shaking, and reducing component imports.</li>
+  <li>Proficiency in creating responsive and adaptive layouts.</li>
+  <li>Creating a custom Redux Slice using Redux Toolkit, simplifying state management.</li>
+  <li>Leveraging Redux Toolkit for seamless pagination control.</li>
+  <li>Storing and retrieving filter parameters in the URL to maintain a consistent user experience.</li>
+  <li>Embracing asynchronous actions with Redux Toolkit's createAsyncThunk.</li>
+</ul>
 
-In the project directory, you can run:
+### About the project in images:<br>
 
-### `npm start`
+<strong> Main Page: </strong> <br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/first.jpg)<br>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<strong> Catalog with sorting and filtering: </strong> <br>
 
-### `npm test`
+![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/second.jpg)<br>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<strong> Catalog with searching: </strong> <br>
 
-### `npm run build`
+![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/third.jpg)<br>
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<strong> Cart Page: </strong> <br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/fifth.jpg)<br>
