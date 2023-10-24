@@ -7,11 +7,12 @@ import logo from '../assets/img/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
+import { selectCart } from '../redux/slices/cartSlice';
 
 function Header() {
   const [loading, setLoading] = React.useState(false);
   const isFixed = useFixedHeader();
-  const { totalPrice, totalCount } = useSelector((state) => state.cart);
+  const { totalPrice, totalCount } = useSelector(selectCart);
 
   React.useEffect(() => {
     setLoading(true);

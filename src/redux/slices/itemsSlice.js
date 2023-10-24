@@ -2,10 +2,10 @@ import axios from 'axios';
 
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-export const fetchItems = createAsyncThunk('items/fetchItemsStatus', async (params) => {
+export const fetchItems = createAsyncThunk('items/fetchItemsStatus', async (params, thunkAPI) => {
   const { sortBy, order, category, search } = params;
   const { data } = await axios.get(
-    `https://=63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
+    `https://63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
   );
   return data;
 });

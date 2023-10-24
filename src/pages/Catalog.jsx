@@ -125,7 +125,11 @@ function Catalog() {
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
         {status === 'error' ? (
           <div className="container__error-message">
-            <h4>Sorry, but we didn't find any items for you</h4>
+            <h4>Sorry, but we didn't receive any items</h4>
+          </div>
+        ) : search_items_result.length === 0 ? (
+          <div className="container__failed-search-message">
+            <h4>Sorry, but we didn't find any items</h4>
           </div>
         ) : (
           <div className="container__items">{search_items_result}</div>
