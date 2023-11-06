@@ -4,7 +4,7 @@
     width: 1200px;
     display: flex;
     justify-content: space-between;
-    .content__items {
+    &__items {
       width: 60%;
       .title {
         display: flex;
@@ -118,7 +118,7 @@
         }
       }
     }
-    .content__other {
+    &__other {
       display: flex;
       flex-direction: column;
       .emptycart {

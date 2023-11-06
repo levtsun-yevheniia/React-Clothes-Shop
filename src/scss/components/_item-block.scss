@@ -7,13 +7,13 @@
 
   &__image {
     margin: 0 auto;
-    width: 260px;
+    width: 240px;
     height: 300px;
     overflow: hidden; /* Hide everything behind the outline*/
     img {
       width: 100%;
       height: 100%;
-      object-fit: contain;
+      object-fit: cover;
       transition: 1s;
       &:hover {
         transform: scale(1.2);

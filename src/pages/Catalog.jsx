@@ -8,7 +8,7 @@ import qs from 'qs';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import Pagination from '../components/CatalogComp/Pagination';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { list } from '../components/CatalogComp/Sort';
 import { fetchItems } from '../redux/slices/itemsSlice';
