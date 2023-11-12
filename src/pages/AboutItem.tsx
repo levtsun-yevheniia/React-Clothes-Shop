@@ -3,11 +3,33 @@ import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import { addItem } from './../redux/slices/cartSlice';
+import { addItem } from '../redux/slices/cartSlice';
 
-const AboutItem = () => {
+const AboutItem: React.FC = () => {
   const params = useParams();
-  const [itemData, setItemData] = React.useState();
+  const [itemData, setItemData] = React.useState<{
+    id: number;
+    title: string;
+    price: string;
+    imageUrl: string;
+    secondimageUrl: string;
+    sizes: string[];
+    types: string[];
+    guide: string;
+    desc: string;
+    material: string;
+  }>({
+    id: 0,
+    title: '',
+    price: '',
+    imageUrl: '',
+    secondimageUrl: '',
+    sizes: [],
+    types: [],
+    guide: '',
+    desc: '',
+    material: '',
+  });
 
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
@@ -39,7 +61,7 @@ const AboutItem = () => {
     { id: 3, isOpen: false },
   ]);
 
-  const toggleSection = (sectionId) => {
+  const toggleSection = (sectionId: number) => {
     setSections((prevSections) =>
       prevSections.map((section) =>
         section.id === sectionId ? { ...section, isOpen: !section.isOpen } : section,

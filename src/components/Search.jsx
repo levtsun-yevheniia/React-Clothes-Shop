@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { SearchContext } from '../App';
+// import { SearchContext } from '../App';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../redux/slices/searchSlice';

@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import NonFound from './pages/NonFound';
 import Cart from './pages/Cart';
 import Catalog from './pages/Catalog';
-import AboutItem from './pages/AboutItem';
+import AboutItem from './pages/AboutItem.tsx';
 
 import { Routes, Route } from 'react-router-dom';
 import React from 'react';
