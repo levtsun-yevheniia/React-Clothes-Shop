@@ -2,20 +2,40 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addItem } from './../../redux/slices/cartSlice';
+import { addItem } from '../../redux/slices/cartSlice';
 
-function ItemBlock({ id, title, price, imageUrl, secondimageUrl, sizes, types }) {
+type ItemBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  secondimageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+const ItemBlock: React.FC<ItemBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  secondimageUrl,
+  sizes,
+  types,
+}) => {
   const [activeType, setActiveType] = useState(0);
   const [activeSize, setActiveSize] = useState(0);
   const typeNames = ['white', 'black', 'blue'];
 
   const dispatch = useDispatch();
-  const cartItems = useSelector((state) => state.cart.items.filter((obj) => obj.id === id));
+  const cartItems = useSelector((state: any) =>
+    state.cart.items.filter((obj: any) => obj.id === id),
+  );
 
   let addedCount;
 
   if (cartItems.length !== 0) {
-    addedCount = cartItems.reduce((sum, item) => sum + item.count, 0);
+    addedCount = cartItems.reduce((sum: number, item: any) => sum + item.count, 0);
   } else {
     addedCount = 0;
   }
@@ -91,6 +111,6 @@ function ItemBlock({ id, title, price, imageUrl, secondimageUrl, sizes, types })
       </div>
     </div>
   );
-}
+};
 
 export default ItemBlock;

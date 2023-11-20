@@ -56,7 +56,7 @@ function Header() {
       <div className="container">
         <Link to="/">
           <div className={loading === true ? 'header__logo active' : 'header__logo'}>
-            <img strokeWidth="38" src={logo} alt="Logo" />
+            <img src={logo} alt="Logo" />
           </div>
         </Link>
 

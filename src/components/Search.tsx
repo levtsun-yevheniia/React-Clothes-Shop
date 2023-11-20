@@ -1,24 +1,23 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-// import { SearchContext } from '../App';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../redux/slices/searchSlice';
 
-const Search = () => {
+const Search: React.FC = () => {
   const dispatch = useDispatch();
-  const searchValue = useSelector((state) => state.search.searchValue);
+  const searchValue = useSelector((state: any) => state.search.searchValue);
 
   const handleClickOutside = () => {
     dispatch(setSearchValue(''));
   };
 
-  const useOutsideClick = (callback) => {
-    const ref = React.useRef();
+  const useOutsideClick = (callback: any) => {
+    const ref = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-      const handleClick = (event) => {
+      const handleClick = (event: any) => {
         if (ref.current && !ref.current.contains(event.target)) {
           callback();
         }

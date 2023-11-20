@@ -13,22 +13,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { list } from '../components/CatalogComp/Sort';
 import { fetchItems } from '../redux/slices/itemsSlice';
 
-function Catalog() {
-  // let [items, setItems] = React.useState([]); replaced with Redux
-
+const Catalog: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
 
-  const { items, status } = useSelector((state) => state.items);
-  const { categoryId, sort, currentPage } = useSelector((state) => state.filter);
+  const { items, status } = useSelector((state: any) => state.items);
+  const { categoryId, sort, currentPage } = useSelector((state: any) => state.filter);
 
-  const searchValue = useSelector((state) => state.search.searchValue);
+  const searchValue = useSelector((state: any) => state.search.searchValue);
 
   const sortType = sort.sortProperty;
 
-  const onChangeCategory = (id) => {
+  const onChangeCategory = (id: number) => {
     dispatch(setCategoryId(id));
   };
 
@@ -62,7 +60,7 @@ function Catalog() {
     console.log('u1');
 
     if (window.location.search) {
-      const params = qs.parse(window.location.search.substring(1));
+      const params: any = qs.parse(window.location.search.substring(1));
       const sort = list.find((obj) => obj.sortProperty === params.sortType);
       if (params.sortType == 'rating' && params.categoryId == 0 && params.currentPage == 0) {
         getItems();
@@ -104,13 +102,13 @@ function Catalog() {
   }, [categoryId, sortType, currentPage]);
 
   const search_items_result = currentItems
-    .filter((obj) => {
+    .filter((obj: any) => {
       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return true;
       }
       return false;
     })
-    .map((obj) => <ItemBlock key={obj.id} {...obj} />);
+    .map((obj: any) => <ItemBlock key={obj.id} {...obj} />);
 
   return (
     <div className="container">
@@ -145,6 +143,6 @@ function Catalog() {
       )}
     </div>
   );
-}
+};
 
 export default Catalog;

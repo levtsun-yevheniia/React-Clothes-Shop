@@ -2,7 +2,12 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSort } from '../../redux/slices/filterSlice';
 
-const list = [
+type SortItem = {
+  name: string;
+  sortProperty: string;
+};
+
+const list: SortItem[] = [
   { name: 'top rated', sortProperty: 'rating' },
   { name: 'price High to Low', sortProperty: 'price' },
   { name: 'price Low to High', sortProperty: '-price' },
@@ -11,7 +16,7 @@ const list = [
 
 function Sort() {
   const dispatch = useDispatch();
-  const sort = useSelector((state) => state.filter.sort);
+  const sort = useSelector((state: any) => state.filter.sort);
 
   const [open, setOpen] = React.useState(false);
   const [triangle, setTriangle] = React.useState(false);
@@ -21,7 +26,7 @@ function Sort() {
     setTriangle(!triangle);
   };
 
-  const onClickListItem = (obj) => {
+  const onClickListItem = (obj: SortItem) => {
     setOpen(!open);
     dispatch(setSort(obj));
     setTriangle(false);
@@ -32,11 +37,11 @@ function Sort() {
     setTriangle(false);
   };
 
-  const useOutsideClick = (callback) => {
-    const ref = React.useRef();
+  const useOutsideClick = (callback: any) => {
+    const ref = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-      const handleClick = (event) => {
+      const handleClick = (event: any) => {
         if (ref.current && !ref.current.contains(event.target)) {
           callback();
         }

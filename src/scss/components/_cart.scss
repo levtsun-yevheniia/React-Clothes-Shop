@@ -25,6 +25,9 @@
       .item {
         display: flex;
         align-items: center;
+        &__link {
+          display: flex;
+        }
         &__image {
           margin: 10px 20px 10px 30px;
           width: 100px;

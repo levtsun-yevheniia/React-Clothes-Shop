@@ -108,7 +108,7 @@ const AboutItem: React.FC = () => {
                 >
                   {' '}
                   <div className="color_block">
-                    <div className={typeNames[typeId]}></div>
+                    <div className={typeNames[i]}></div>
                   </div>
                 </li>
               ))}
@@ -137,7 +137,7 @@ const AboutItem: React.FC = () => {
           </div>
         </div>
         <div className="info_items">
-          <div className="item" key={sections[0]}>
+          <div className="item">
             <div
               className={`${
                 sections[0].isOpen ? 'item__header item__header--open' : 'item__header'
@@ -181,7 +181,7 @@ const AboutItem: React.FC = () => {
               </div>
             )}
           </div>
-          <div className="item" key={sections[1]}>
+          <div className="item">
             <div
               className={`${
                 sections[1].isOpen ? 'item__header item__header--open' : 'item__header'
