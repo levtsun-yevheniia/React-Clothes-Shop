@@ -8,10 +8,26 @@ import qs from 'qs';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import Pagination from '../components/CatalogComp/Pagination';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { list } from '../components/CatalogComp/Sort';
 import { fetchItems } from '../redux/slices/itemsSlice';
+
+type TCatalogItem = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  secondimageUrl: string;
+  sizes: number[];
+  types: number[];
+};
+
+type TParams = {
+  sortType?: string;
+  categoryId?: number;
+  currentPage?: number;
+};
 
 const Catalog: React.FC = () => {
   const dispatch = useDispatch();
@@ -30,7 +46,7 @@ const Catalog: React.FC = () => {
     dispatch(setCategoryId(id));
   };
 
-  const onPageChange = ({ selected }) => {
+  const onPageChange = ({ selected }: { selected: number }) => {
     dispatch(setCurrentPage(selected));
   };
 
@@ -60,7 +76,7 @@ const Catalog: React.FC = () => {
     console.log('u1');
 
     if (window.location.search) {
-      const params: any = qs.parse(window.location.search.substring(1));
+      const params: TParams = qs.parse(window.location.search.substring(1));
       const sort = list.find((obj) => obj.sortProperty === params.sortType);
       if (params.sortType == 'rating' && params.categoryId == 0 && params.currentPage == 0) {
         getItems();
@@ -102,13 +118,13 @@ const Catalog: React.FC = () => {
   }, [categoryId, sortType, currentPage]);
 
   const search_items_result = currentItems
-    .filter((obj: any) => {
+    .filter((obj: TCatalogItem) => {
       if (obj.title.toLowerCase().includes(searchValue.toLowerCase())) {
         return true;
       }
       return false;
     })
-    .map((obj: any) => <ItemBlock key={obj.id} {...obj} />);
+    .map((obj: TCatalogItem) => <ItemBlock key={obj.id} {...obj} />);
 
   return (
     <div className="container">

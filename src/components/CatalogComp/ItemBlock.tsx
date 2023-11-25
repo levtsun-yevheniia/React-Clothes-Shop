@@ -14,6 +14,17 @@ type ItemBlockProps = {
   types: number[];
 };
 
+type TCartItem = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  secondimageUrl: string;
+  type: string;
+  size: number;
+  count: number;
+};
+
 const ItemBlock: React.FC<ItemBlockProps> = ({
   id,
   title,
@@ -28,20 +39,21 @@ const ItemBlock: React.FC<ItemBlockProps> = ({
   const typeNames = ['white', 'black', 'blue'];
 
   const dispatch = useDispatch();
+
   const cartItems = useSelector((state: any) =>
-    state.cart.items.filter((obj: any) => obj.id === id),
+    state.cart.items.filter((obj: TCartItem) => obj.id === id),
   );
 
   let addedCount;
 
   if (cartItems.length !== 0) {
-    addedCount = cartItems.reduce((sum: number, item: any) => sum + item.count, 0);
+    addedCount = cartItems.reduce((sum: number, item: TCartItem) => sum + item.count, 0);
   } else {
     addedCount = 0;
   }
 
   const onClickAdd = () => {
-    const item = {
+    const item: TCartItem = {
       id,
       title,
       price,
@@ -49,6 +61,7 @@ const ItemBlock: React.FC<ItemBlockProps> = ({
       secondimageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
+      count: 1,
     };
     dispatch(addItem(item));
   };
@@ -60,36 +73,37 @@ const ItemBlock: React.FC<ItemBlockProps> = ({
           <img src={imageUrl} alt="item" />
         </div>
         <h4 className="item-block__title">{title}</h4>
-        <div className="item-block__selector">
-          <ul className="colors">
-            {types.map((typeId, i) => (
-              <li
-                key={i}
-                onClick={() => setActiveType(i)}
-                className={activeType === i ? 'active' : ''}
-              >
-                {' '}
-                <div className="color_block">
-                  <div className={typeNames[typeId]}></div>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          <ul className="list list--second">
-            {sizes.map((size, i) => (
-              <li
-                key={i}
-                onClick={() => setActiveSize(i)}
-                className={activeSize === i ? 'active' : ''}
-              >
-                {' '}
-                {size}
-              </li>
-            ))}
-          </ul>
-        </div>
       </Link>
+      <div className="item-block__selector">
+        <ul className="colors">
+          {types.map((typeId, i) => (
+            <li
+              key={i}
+              onClick={() => setActiveType(i)}
+              className={activeType === i ? 'active' : ''}
+            >
+              {' '}
+              <div className="color_block">
+                <div className={typeNames[typeId]}></div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <ul className="list list--second">
+          {sizes.map((size, i) => (
+            <li
+              key={i}
+              onClick={() => setActiveSize(i)}
+              className={activeSize === i ? 'active' : ''}
+            >
+              {' '}
+              {size}
+            </li>
+          ))}
+        </ul>
+      </div>
+
       <div className="item-block__bottom">
         <div className="item-block__price"> {price} $</div>
         <div onClick={onClickAdd} className="button button--add">

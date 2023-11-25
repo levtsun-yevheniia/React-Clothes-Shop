@@ -13,12 +13,16 @@ const Search: React.FC = () => {
     dispatch(setSearchValue(''));
   };
 
-  const useOutsideClick = (callback: any) => {
+  const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(setSearchValue(event.target.value));
+  };
+
+  const useOutsideClick = (callback: () => void) => {
     const ref = React.useRef<HTMLDivElement>(null);
 
     React.useEffect(() => {
-      const handleClick = (event: any) => {
-        if (ref.current && !ref.current.contains(event.target)) {
+      const handleClick = (event: MouseEvent) => {
+        if (ref.current && !ref.current.contains(event.target as Node)) {
           callback();
         }
       };
@@ -28,7 +32,7 @@ const Search: React.FC = () => {
       return () => {
         document.removeEventListener('click', handleClick, true);
       };
-    }, [ref]);
+    }, [ref, callback]);
 
     return ref;
   }; //clearing the search field when we have click outside the field
@@ -39,7 +43,7 @@ const Search: React.FC = () => {
     <div ref={searchcomp} className="box">
       <input
         value={searchValue}
-        onChange={(event) => dispatch(setSearchValue(event.target.value))}
+        onChange={onChangeInput}
         type="text"
         name=""
         className="search-txt"

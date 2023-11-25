@@ -4,6 +4,16 @@ import CartItem from '../components/CartComp/CartItem';
 import CartEmpty from '../components/CartComp/CartEmpty';
 import { clearItems, selectCart } from '../redux/slices/cartSlice';
 
+type CartItemProps = {
+  id: string;
+  title: string;
+  size: number;
+  type: number;
+  price: number;
+  count: number;
+  imageUrl: string;
+};
+
 const Cart: React.FC = () => {
   const dispatch = useDispatch();
   const { totalPrice, totalCount, items } = useSelector(selectCart);
@@ -30,7 +40,7 @@ const Cart: React.FC = () => {
               <li>Item price</li>
             </ul>
             <div className="line"></div>
-            {items.map((item: any) => (
+            {items.map((item: CartItemProps) => (
               <CartItem key={item.id + item.size + item.type} {...item} />
             ))}
             <div className="line line--lighter"></div>
