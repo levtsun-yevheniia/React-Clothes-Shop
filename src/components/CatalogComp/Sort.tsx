@@ -1,13 +1,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../../redux/slices/filterSlice';
+import { TSort, setSort } from '../../redux/slices/filterSlice';
 
-type SortItem = {
-  name: string;
-  sortProperty: string;
-};
-
-const list: SortItem[] = [
+const list: TSort[] = [
   { name: 'top rated', sortProperty: 'rating' },
   { name: 'price High to Low', sortProperty: 'price' },
   { name: 'price Low to High', sortProperty: '-price' },
@@ -26,7 +21,7 @@ function Sort() {
     setTriangle(!triangle);
   };
 
-  const onClickListItem = (obj: SortItem) => {
+  const onClickListItem = (obj: TSort) => {
     setOpen(!open);
     dispatch(setSort(obj));
     setTriangle(false);

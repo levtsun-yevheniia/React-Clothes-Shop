@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { addItem, remoweItem, minusItem } from '../../redux/slices/cartSlice';
+import { addItem, remoweItem, minusItem, TCartItem } from '../../redux/slices/cartSlice';
 
 type CartItemProps = {
   id: string;
   title: string;
   size: number;
-  type: number;
+  type: string;
   price: number;
   count: number;
   imageUrl: string;
@@ -17,19 +17,19 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, size, type, price, count
   const dispatch = useDispatch();
 
   const onClickPlus = () => {
-    dispatch(addItem({ id, size, type }));
+    dispatch(addItem({ id, size, type } as TCartItem));
   };
 
   const onClickMinus = () => {
     if (count === 1) {
-      dispatch(remoweItem({ id, size, type }));
+      dispatch(remoweItem({ id, size, type } as TCartItem));
     } else {
-      dispatch(minusItem({ id, size, type }));
+      dispatch(minusItem({ id, size, type } as TCartItem));
     }
   };
 
   const onClickRemove = () => {
-    dispatch(remoweItem({ id, size, type }));
+    dispatch(remoweItem({ id, size, type } as TCartItem));
   };
 
   return (

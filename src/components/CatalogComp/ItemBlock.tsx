@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { addItem } from '../../redux/slices/cartSlice';
+import { TCartItem, addItem } from '../../redux/slices/cartSlice';
 
 type ItemBlockProps = {
   id: string;
@@ -12,17 +12,6 @@ type ItemBlockProps = {
   secondimageUrl: string;
   sizes: number[];
   types: number[];
-};
-
-type TCartItem = {
-  id: string;
-  title: string;
-  price: number;
-  imageUrl: string;
-  secondimageUrl: string;
-  type: string;
-  size: number;
-  count: number;
 };
 
 const ItemBlock: React.FC<ItemBlockProps> = ({
@@ -58,7 +47,6 @@ const ItemBlock: React.FC<ItemBlockProps> = ({
       title,
       price,
       imageUrl,
-      secondimageUrl,
       type: typeNames[activeType],
       size: sizes[activeSize],
       count: 1,

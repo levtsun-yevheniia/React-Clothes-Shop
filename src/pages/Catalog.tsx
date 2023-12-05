@@ -5,15 +5,16 @@ import ItemBlock from '../components/CatalogComp/ItemBlock';
 import React from 'react';
 import qs from 'qs';
 
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { setCategoryId, setCurrentPage, setFilters } from '../redux/slices/filterSlice';
 import Pagination from '../components/CatalogComp/Pagination';
 import { useNavigate } from 'react-router-dom';
 
 import { list } from '../components/CatalogComp/Sort';
 import { fetchItems } from '../redux/slices/itemsSlice';
+import { useAppDispatch } from '../redux/store';
 
-type TCatalogItem = {
+export type TCatalogItem = {
   id: string;
   title: string;
   price: number;
@@ -24,13 +25,13 @@ type TCatalogItem = {
 };
 
 type TParams = {
-  sortType?: string;
-  categoryId?: number;
-  currentPage?: number;
+  sortType: string;
+  categoryId: number;
+  currentPage: number;
 };
 
 const Catalog: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
@@ -66,7 +67,7 @@ const Catalog: React.FC = () => {
       fetchItems({
         order,
         sortBy,
-        category,
+        categoryId,
         search,
       }),
     );
@@ -76,18 +77,19 @@ const Catalog: React.FC = () => {
     console.log('u1');
 
     if (window.location.search) {
-      const params: TParams = qs.parse(window.location.search.substring(1));
+      const params: TParams = qs.parse(window.location.search.substring(1)) as unknown as TParams;
       const sort = list.find((obj) => obj.sortProperty === params.sortType);
+
+      const updatedParams = {
+        ...params,
+        sort: sort,
+      };
+
       if (params.sortType == 'rating' && params.categoryId == 0 && params.currentPage == 0) {
         getItems();
       }
       console.log('took data from the search string and passed it to the parameters');
-      dispatch(
-        setFilters({
-          ...params,
-          sort,
-        }),
-      );
+      dispatch(setFilters(updatedParams));
       isSearch.current = true;
     }
   }, []);
