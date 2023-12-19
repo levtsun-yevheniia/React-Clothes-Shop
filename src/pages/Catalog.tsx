@@ -67,7 +67,7 @@ const Catalog: React.FC = () => {
       fetchItems({
         order,
         sortBy,
-        categoryId,
+        category,
         search,
       }),
     );

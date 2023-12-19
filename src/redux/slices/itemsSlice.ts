@@ -8,14 +8,14 @@ import { TSort } from './filterSlice';
 export type FetchItems = {
   sortBy: TSort;
   order: string;
-  categoryId?: number;
+  category: string;
   search: string;
 };
 
 export const fetchItems = createAsyncThunk('items/fetchItemsStatus', async (params: FetchItems) => {
-  const { sortBy, order, categoryId, search } = params;
+  const { sortBy, order, category, search } = params;
   const { data } = await axios.get(
-    `https://63b609d958084a7af3a8043f.mockapi.io/items?${categoryId}&sortBy=${sortBy}&order=${order}${search}`,
+    `https://63b609d958084a7af3a8043f.mockapi.io/items?${category}&sortBy=${sortBy}&order=${order}${search}`,
   );
   return data as TCatalogItem[];
 });
