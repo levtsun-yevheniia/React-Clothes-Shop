@@ -12,11 +12,23 @@ import { selectCart } from '../redux/slices/cartSlice';
 function Header() {
   const [loading, setLoading] = React.useState(false);
   const isFixed = useFixedHeader();
-  const { totalPrice, totalCount } = useSelector(selectCart);
+  const { totalPrice, items, totalCount } = useSelector(selectCart);
+  let isMounted = React.useRef(false);
 
   React.useEffect(() => {
     setLoading(true);
+    //isMounted.current = false;
   }, []);
+
+  React.useEffect(() => {
+    if (isMounted.current === true) {
+      const json = JSON.stringify(items);
+      localStorage.setItem('cart', json);
+    } else {
+      isMounted.current = true;
+    }
+    console.log(localStorage.getItem('cart'));
+  }, [items]);
 
   function useFixedHeader() {
     const [isFixed, setIsFixed] = React.useState(false);
