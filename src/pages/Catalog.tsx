@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { list } from '../components/CatalogComp/Sort';
 import { fetchItems } from '../redux/slices/itemsSlice';
 import { useAppDispatch } from '../redux/store';
+import Loader from '../components/CatalogComp/Loader';
 
 export type TCatalogItem = {
   id: string;
@@ -35,6 +36,7 @@ const Catalog: React.FC = () => {
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
+  const isItemsLoaded = React.useRef(true);
 
   const { items, status } = useSelector((state: any) => state.items);
   const { categoryId, sort, currentPage } = useSelector((state: any) => state.filter);
@@ -58,12 +60,13 @@ const Catalog: React.FC = () => {
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
   const getItems = async () => {
+    isItemsLoaded.current = true;
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    dispatch(
+    await dispatch(
       fetchItems({
         order,
         sortBy,
@@ -71,6 +74,7 @@ const Catalog: React.FC = () => {
         search,
       }),
     );
+    isItemsLoaded.current = false;
   };
 
   React.useEffect(() => {
@@ -96,7 +100,7 @@ const Catalog: React.FC = () => {
 
   React.useEffect(() => {
     console.log('u2');
-    // setLoading(true);
+
     if (!isSearch.current) {
       getItems();
     }
@@ -139,7 +143,10 @@ const Catalog: React.FC = () => {
       </div>
       <div className="container__body">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
-        {status === 'error' ? (
+
+        {isItemsLoaded.current === true ? (
+          <Loader />
+        ) : status === 'error' ? (
           <div className="container__error-message">
             <h4>Sorry, but we didn't receive any items</h4>
           </div>

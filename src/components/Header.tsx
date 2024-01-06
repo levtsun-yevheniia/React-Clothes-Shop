@@ -17,7 +17,6 @@ function Header() {
 
   React.useEffect(() => {
     setLoading(true);
-    //isMounted.current = false;
   }, []);
 
   React.useEffect(() => {
@@ -27,7 +26,6 @@ function Header() {
     } else {
       isMounted.current = true;
     }
-    console.log(localStorage.getItem('cart'));
   }, [items]);
 
   function useFixedHeader() {
