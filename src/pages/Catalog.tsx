@@ -2,7 +2,7 @@ import Categories from '../components/CatalogComp/Categories';
 import Sort from '../components/CatalogComp/Sort';
 import ItemBlock from '../components/CatalogComp/ItemBlock';
 
-import React from 'react';
+import React, { useState } from 'react';
 import qs from 'qs';
 
 import { useSelector } from 'react-redux';
@@ -36,7 +36,6 @@ const Catalog: React.FC = () => {
   const navigate = useNavigate();
   const isSearch = React.useRef(false);
   const isMounted = React.useRef(false);
-  const isItemsLoaded = React.useRef(true);
 
   const { items, status } = useSelector((state: any) => state.items);
   const { categoryId, sort, currentPage } = useSelector((state: any) => state.filter);
@@ -60,13 +59,12 @@ const Catalog: React.FC = () => {
   const pageCount = Math.ceil(items.length / itemsPerPage);
 
   const getItems = async () => {
-    isItemsLoaded.current = true;
     const order = sortType.includes('-') ? 'asc' : 'desc';
     const sortBy = sortType.replace('-', '');
     const category = categoryId > 0 ? `category=${categoryId}` : '';
     const search = searchValue ? `&search=${searchValue}` : '';
 
-    await dispatch(
+    dispatch(
       fetchItems({
         order,
         sortBy,
@@ -74,7 +72,6 @@ const Catalog: React.FC = () => {
         search,
       }),
     );
-    isItemsLoaded.current = false;
   };
 
   React.useEffect(() => {
@@ -106,6 +103,7 @@ const Catalog: React.FC = () => {
     }
     isSearch.current = false;
     dispatch(setCurrentPage(0));
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [categoryId, sortType, searchValue]);
 
@@ -144,15 +142,13 @@ const Catalog: React.FC = () => {
       <div className="container__body">
         <Categories value={categoryId} onChangeCategory={onChangeCategory} />
 
-        {isItemsLoaded.current === true ? (
-          <Loader />
-        ) : status === 'error' ? (
+        {status === 'error' ? (
           <div className="container__error-message">
             <h4>Sorry, but we didn't receive any items</h4>
           </div>
         ) : search_items_result.length === 0 ? (
-          <div className="container__failed-search-message">
-            <h4>Sorry, but we didn't find any items</h4>
+          <div className="container__loader-message">
+            <Loader />
           </div>
         ) : (
           <div className="container__items">{search_items_result}</div>

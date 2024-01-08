@@ -27,7 +27,7 @@ const filterSlice = createSlice({
   reducers: {
     //actions
     setCategoryId(state, action: PayloadAction<number>) {
-      state.categoryId = action.payload; //Here we pass to the variable categoryId the value that we got from action.payload
+      state.categoryId = action.payload;
     },
     setSort(state, action: PayloadAction<TSort>) {
       state.sort = action.payload;

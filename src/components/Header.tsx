@@ -1,19 +1,31 @@
 import { Link } from 'react-router-dom';
 import React from 'react';
 import Search from './Search';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import logo from '../assets/img/logo.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { selectCart } from '../redux/slices/cartSlice';
+import { IFilterSliceState, setFilters } from '../redux/slices/filterSlice';
 
 function Header() {
+  const dispatch = useDispatch();
+
   const [loading, setLoading] = React.useState(false);
   const isFixed = useFixedHeader();
   const { totalPrice, items, totalCount } = useSelector(selectCart);
   let isMounted = React.useRef(false);
+
+  const nullParams: IFilterSliceState = {
+    categoryId: 0,
+    sort: {
+      name: 'top rated',
+      sortProperty: 'rating',
+    },
+    currentPage: 0,
+  };
 
   React.useEffect(() => {
     setLoading(true);
@@ -65,7 +77,10 @@ function Header() {
     <div className={isFixed ? 'header header--fixed' : 'header'}>
       <div className="container">
         <Link to="/">
-          <div className={loading === true ? 'header__logo active' : 'header__logo'}>
+          <div
+            onClick={() => dispatch(setFilters(nullParams))}
+            className={loading === true ? 'header__logo active' : 'header__logo'}
+          >
             <img src={logo} alt="Logo" />
           </div>
         </Link>
