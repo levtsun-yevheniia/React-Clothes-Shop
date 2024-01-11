@@ -90,7 +90,9 @@ function Header() {
             <li>
               <Link to="/catalog">Catalog</Link>
             </li>
-            <li>For client</li>
+            <li>
+              <Link to="/forclient">For client</Link>
+            </li>
           </ul>
         </div>
 

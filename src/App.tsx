@@ -8,6 +8,7 @@ import AboutItem from './pages/AboutItem';
 
 import { Routes, Route } from 'react-router-dom';
 import React from 'react';
+import ForClient from './pages/ForClient';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="*" element={<NonFound />}></Route>
         <Route path="/item/:id" element={<AboutItem />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
+        <Route path="/forclient" element={<ForClient />}></Route>
       </Routes>
     </div>
   );

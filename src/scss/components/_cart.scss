@@ -1,19 +1,19 @@
 .cart {
   .content {
-    margin: 150px auto 110px;
-    width: 1200px;
     display: flex;
     justify-content: space-between;
+    margin: 150px auto 110px;
+    width: 1200px;
     &__items {
       width: 60%;
       .title {
         display: flex;
         justify-content: space-between;
         li {
+          margin-right: 48px;
           color: $red;
           font-size: 22px;
           font-weight: bold;
-          margin-right: 48px;
           &:first-child {
             margin: 0 auto 0 30px;
           }
@@ -34,9 +34,9 @@
           height: 140px;
           overflow: hidden;
           img {
+            object-fit: contain;
             width: 100%;
             height: 100%;
-            object-fit: contain;
           }
         }
         &__info {
@@ -56,17 +56,16 @@
                 font-weight: 600;
               }
               .number {
+                margin-left: 5px;
                 font-family: 'Poppins';
-                // color: $black;
                 font-size: 15px;
                 font-weight: 400;
-                margin-left: 5px;
               }
             }
             &__color {
+              margin-top: 5px;
               width: 20px;
               height: 20px;
-              margin-top: 5px;
               border: 1px solid $red;
               .black {
                 width: 100%;
@@ -87,34 +86,50 @@
           }
           .quantity {
             display: flex;
-            align-items: center;
             padding-right: 15px;
+            align-items: center;
+
             .quantity-btn {
               margin: 3px 15px 0;
+              transition: transform 0.2s ease-in-out;
+              cursor: pointer;
+              svg {
+                &:hover {
+                  transform: scale(1.1);
+                }
+              }
             }
           }
           .price {
+            margin-right: 18px;
+            padding: 0 15px;
             width: 100px;
             text-align: right;
-            padding: 0 15px;
-            margin-right: 18px;
             p {
               font-weight: 500;
             }
           }
           .remove {
             padding-right: 20px;
+            .remove-btn {
+              transition: transform 0.2s ease-in-out;
+              cursor: pointer;
+              svg {
+                &:hover {
+                  transform: scale(1.1);
+                }
+              }
+            }
           }
         }
       }
       .line {
-        margin: 0 auto;
         content: '';
         display: block;
+        margin: 10px auto 0;
         width: 100%;
         height: 1px;
         background-color: $black;
-        margin-top: 10px;
         &--lighter {
           margin-top: 0;
           background-color: rgb(198, 198, 198);
@@ -127,27 +142,42 @@
       .emptycart {
         display: flex;
         align-items: center;
-        padding: 0 10px 5px 0;
         margin-left: auto;
+        padding: 0 10px 5px 0;
         &__text {
-          background-color: white;
           padding-right: 5px;
-          border: none;
-          text-align: right;
+          height: 25px;
           width: auto;
+          background-color: white;
+
+          text-align: right;
           color: $red;
           font-family: 'Cormorant';
           font-weight: 400;
           font-size: 20px;
+          border: none;
+
+          cursor: pointer;
+          transition: font-size 0.2s ease-in-out;
         }
         &__svg {
           fill: $red;
+          cursor: pointer;
+          transition: transform 0.2s ease-in-out;
+        }
+        &:hover {
+          .emptycart__text {
+            font-size: 20.5px;
+          }
+          .emptycart__svg {
+            transform: scale(1.07);
+          }
         }
       }
       .subtotal {
-        border: 1px solid rgb(145, 145, 145);
         padding: 20px 30px;
         height: fit-content;
+        border: 1px solid rgb(145, 145, 145);
         .subtotal__title {
           p {
             font-family: 'Poppins';
@@ -189,32 +219,39 @@
         flex-direction: column;
         margin-top: 20px;
         .checkout {
-          background-color: $red;
-          border: none;
-          color: white;
-          cursor: pointer;
           display: inline-block;
+          padding: 13px 23px;
+          width: 100%;
+          background-color: $red;
+
+          color: white;
           font-family: 'Poppins';
           font-weight: 400;
           font-size: 18px;
-          padding: 13px 23px;
           text-align: center;
-          width: 100%;
+          border: none;
+          cursor: pointer;
+          &:hover {
+            background-color: $black;
+          }
         }
         .continue {
+          display: inline-block;
+          margin-top: 15px;
+          padding: 13px 23px;
+          width: 100%;
           background-color: white;
+          text-align: center;
           border: 1px solid $black;
           cursor: pointer;
-          display: inline-block;
-          padding: 13px 23px;
-          text-align: center;
-          width: 100%;
-          margin-top: 15px;
           .continuelink {
             color: $black;
             font-family: 'Poppins';
             font-weight: 400;
             font-size: 18px;
+            &:hover {
+              color: $red;
+            }
           }
         }
       }

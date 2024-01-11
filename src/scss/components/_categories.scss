@@ -1,24 +1,23 @@
 @import '../variables';
 
 .categories {
-  padding-left: 25px;
   width: 15%;
+  padding-left: 25px;
   ul {
     display: flex;
     flex-direction: column;
 
     li {
+      margin-bottom: 15px;
       padding: 13px 20px;
+      font-weight: bold;
       border: 1.5px solid #5b5b5b;
       border-radius: 10px;
-      margin-bottom: 15px;
-      font-weight: bold;
       cursor: pointer;
       transition: background-color 0.1s ease-in-out;
       @include noselect();
 
       &:hover {
-        // background-color: darken(#f9f9f9, 2%);
         color: $red;
       }
 

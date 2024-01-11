@@ -2,14 +2,14 @@
 
 .button {
   display: inline-block;
-  background-color: white;
-  border-radius: 30px;
-  padding: 10px;
   min-width: 40px;
+  padding: 10px;
   text-align: center;
+  background-color: white;
+  border: 1.5px solid transparent;
+  border-radius: 30px;
   cursor: pointer;
   transition: background-color $duration ease-in-out, border-color $duration ease-in-out;
-  border: 1.5px solid transparent;
   @include noselect();
 
   &,
@@ -19,9 +19,6 @@
 
   &:hover {
     border: #ff0000 solid 1.5px;
-  }
-
-  &:hover {
     &,
     span {
       color: $black;
@@ -29,15 +26,15 @@
   }
 
   &:active {
-    background-color: $black;
+    border: $black solid 1.5px;
   }
 
   &__delimiter {
+    margin-left: 14px;
+    margin-right: 14px;
     width: 1px;
     height: 25px;
     background-color: $red;
-    margin-left: 14px;
-    margin-right: 14px;
   }
 
   &--add {
@@ -51,10 +48,10 @@
     }
 
     span {
+      margin-right: 5px;
       font-family: 'Poppins';
       font-weight: 400;
       font-size: 16px;
-      margin-right: 5px;
     }
 
     &:hover {
@@ -91,9 +88,7 @@
     align-items: center;
     line-height: 23px;
     padding: 12px 25px;
-    font-size: 18px;
     border: 1.5px solid $red;
-
     transform: translateY(-20px);
     opacity: 0%;
     transition: opacity 0.8s ease-in, transform 0.8s ease-in;

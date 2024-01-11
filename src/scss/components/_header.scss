@@ -2,12 +2,12 @@
 
 .header {
   padding: 20px 0;
+  background-color: #fff;
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   z-index: 1000;
-  background-color: #fff;
 
   &--fixed {
     position: fixed;
@@ -19,8 +19,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 90%;
     margin: 0 auto;
+    width: 90%;
   }
 
   &__logo {
@@ -52,9 +52,9 @@
       display: flex;
 
       li {
+        margin-right: 25px;
         color: $red;
         font-size: 22px;
-        margin-right: 25px;
         font-weight: bold;
 
         transform: translateY(-20px);
@@ -97,11 +97,11 @@
     display: flex;
     align-items: center;
     .search {
+      margin-right: 5px;
       transform: translateY(-20px);
       opacity: 0%;
       transition: transform 0.8s ease-in, opacity 0.8s ease-in;
       transition-delay: 0.3s;
-      margin-right: 5px;
 
       &:hover {
         border: #ff0000 solid 1.5px;
@@ -109,18 +109,18 @@
       }
 
       .search-btn {
+        display: flex;
+        justify-content: center;
+        padding: 14px 14px;
+        align-items: center;
         color: #ff0000;
         float: right;
         font-size: 17px;
-        padding: 14px 14px;
+        text-decoration: none;
         border: none;
         background: none;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         transition: 0.4s;
         cursor: pointer;
-        text-decoration: none;
 
         i {
           font-size: 20px;
@@ -128,14 +128,14 @@
       }
 
       .search-txt {
+        width: 0px;
         border: none;
         background: none;
         outline: none;
         float: left;
-        transition: 0.4s;
-        width: 0px;
         font-size: 18px;
         transform: translateY(2px);
+        transition: 0.4s;
 
         line-height: 40px;
         &::placeholder {
