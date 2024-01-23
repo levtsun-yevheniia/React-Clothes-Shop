@@ -2,8 +2,8 @@
   .content {
     display: flex;
     justify-content: space-between;
+    width: 100%;
     margin: 150px auto 110px;
-    width: 1200px;
     &__items {
       width: 60%;
       .title {
@@ -29,19 +29,19 @@
           display: flex;
         }
         &__image {
-          margin: 10px 20px 10px 30px;
           width: 100px;
           height: 140px;
           overflow: hidden;
+          margin: 10px 20px 10px 30px;
           img {
-            object-fit: contain;
             width: 100%;
             height: 100%;
+            object-fit: contain;
           }
         }
         &__info {
           margin-bottom: auto;
-          .title {
+          .item-title {
             margin: 30px auto 0;
             p {
               font-size: 20px;
@@ -63,9 +63,9 @@
               }
             }
             &__color {
-              margin-top: 5px;
               width: 20px;
               height: 20px;
+              margin-top: 5px;
               border: 1px solid $red;
               .black {
                 width: 100%;
@@ -86,9 +86,16 @@
           }
           .quantity {
             display: flex;
-            padding-right: 15px;
             align-items: center;
+            padding-right: 15px;
 
+            .quantity-text {
+              display: none;
+              font-family: 'Cormorant';
+              font-weight: bold;
+              color: $black;
+              font-size: 20px;
+            }
             .quantity-btn {
               margin: 3px 15px 0;
               transition: transform 0.2s ease-in-out;
@@ -101,9 +108,9 @@
             }
           }
           .price {
+            width: 100px;
             margin-right: 18px;
             padding: 0 15px;
-            width: 100px;
             text-align: right;
             p {
               font-weight: 500;
@@ -126,9 +133,9 @@
       .line {
         content: '';
         display: block;
-        margin: 10px auto 0;
         width: 100%;
         height: 1px;
+        margin: 10px auto 0;
         background-color: $black;
         &--lighter {
           margin-top: 0;
@@ -145,9 +152,9 @@
         margin-left: auto;
         padding: 0 10px 5px 0;
         &__text {
-          padding-right: 5px;
           height: 25px;
           width: auto;
+          padding-right: 5px;
           background-color: white;
 
           text-align: right;
@@ -175,8 +182,8 @@
         }
       }
       .subtotal {
-        padding: 20px 30px;
         height: fit-content;
+        padding: 20px 30px;
         border: 1px solid rgb(145, 145, 145);
         .subtotal__title {
           p {
@@ -220,8 +227,8 @@
         margin-top: 20px;
         .checkout {
           display: inline-block;
-          padding: 13px 23px;
           width: 100%;
+          padding: 13px 23px;
           background-color: $red;
 
           color: white;
@@ -237,9 +244,9 @@
         }
         .continue {
           display: inline-block;
+          width: 100%;
           margin-top: 15px;
           padding: 13px 23px;
-          width: 100%;
           background-color: white;
           text-align: center;
           border: 1px solid $black;
@@ -254,6 +261,73 @@
             }
           }
         }
+      }
+    }
+  }
+
+  @media only screen and (max-width: 1279px) {
+    .content {
+      flex-direction: column;
+
+      &__items {
+        min-width: 656px;
+        margin: 0 auto 30px;
+        .line {
+          &--lighter {
+            display: none;
+          }
+        }
+      }
+
+      &__other {
+        width: 100%;
+        max-width: 650px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    .content {
+      margin-top: 0px;
+      &__items {
+        min-width: 410px;
+        width: fit-content;
+        margin-bottom: 60px;
+        .title {
+          display: none;
+        }
+        .line {
+          display: none;
+        }
+        .item {
+          flex-direction: column;
+          position: relative;
+          width: fit-content;
+
+          &__link {
+            width: 335px;
+            margin-top: 45px;
+          }
+
+          &__charact {
+            width: fit-content;
+            align-items: center;
+            position: absolute;
+            top: 100%;
+            left: 32px;
+
+            .quantity {
+              .quantity-text {
+                display: block;
+              }
+            }
+          }
+        }
+      }
+      &__other {
+        width: fit-content;
+        max-width: 450px;
       }
     }
   }

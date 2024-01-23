@@ -236,4 +236,23 @@
       }
     }
   }
+
+  @media only screen and (max-width: 1023px) {
+    flex-direction: column;
+    align-items: center;
+    &__info {
+      margin: 60px 0 30px 0;
+      width: 60%;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    align-items: center;
+    &__images {
+      width: 80%;
+    }
+    &__info {
+      width: 80%;
+    }
+  }
 }

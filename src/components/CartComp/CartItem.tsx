@@ -39,7 +39,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, size, type, price, count
           <img src={imageUrl} alt="" />
         </div>
         <div className="item__info">
-          <div className="title">
+          <div className="item-title">
             <p>{title}</p>
           </div>
           <div className="charact">
@@ -55,6 +55,7 @@ const CartItem: React.FC<CartItemProps> = ({ id, title, size, type, price, count
       </Link>
       <div className="item__charact">
         <div className="quantity">
+          <p className="quantity-text">Quantity:</p>
           <div onClick={onClickMinus} className="quantity-btn">
             <svg
               width="24"

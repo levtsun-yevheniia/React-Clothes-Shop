@@ -1,8 +1,9 @@
 @import '../variables';
 
 .categories {
-  width: 15%;
+  width: 16%;
   padding-left: 25px;
+  overflow-x: hidden;
   ul {
     display: flex;
     flex-direction: column;
@@ -32,7 +33,33 @@
     }
   }
 
-  @media (max-width: 1280px) {
-    width: 15%;
+  @media only screen and (max-width: 1319px) {
+    width: 20%;
+    min-width: 225px;
+  }
+
+  @media only screen and (max-width: 1023px) {
+    height: fit-content;
+    width: 70%;
+    min-width: 615px;
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      li {
+        height: fit-content;
+        margin-right: 10px;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    ul {
+      justify-content: left;
+    }
   }
 }

@@ -5,12 +5,17 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { setSearchValue } from '../redux/slices/searchSlice';
 
-const Search: React.FC = () => {
+interface SearchProps {
+  setSmallScreen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Search: React.FC<SearchProps> = ({ setSmallScreen }) => {
   const dispatch = useDispatch();
   const searchValue = useSelector((state: any) => state.search.searchValue);
 
   const handleClickOutside = () => {
     dispatch(setSearchValue(''));
+    setSmallScreen(false);
   };
 
   const onChangeInput = (event: React.ChangeEvent<HTMLInputElement>) => {

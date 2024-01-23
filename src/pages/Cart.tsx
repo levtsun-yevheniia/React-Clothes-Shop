@@ -35,9 +35,9 @@ const Cart: React.FC = () => {
         <div className="content">
           <div className="content__items">
             <ul className="title">
-              <li>Product</li>
-              <li>Quantity</li>
-              <li>Item price</li>
+              <li className="title__product">Product</li>
+              <li className="title__quantity">Quantity</li>
+              <li className="title__item-price">Item price</li>
             </ul>
             <div className="line"></div>
             {items.map((item: CartItemProps) => (

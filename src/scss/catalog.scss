@@ -30,9 +30,26 @@
     column-gap: 10px;
     row-gap: 20px;
     place-items: center;
+  }
 
-    @media (max-width: 1440px) {
-      width: 80%;
+  @media (max-width: 1319px) {
+    &__items {
+      width: 70%;
     }
+  }
+
+  @media only screen and (max-width: 1023px) {
+    /* Стили для планшетов */
+    &__body {
+      flex-direction: column;
+    }
+    &__items {
+      width: 100%;
+      margin-top: 25px;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    /* Стили для мобильных устройств */
   }
 }
