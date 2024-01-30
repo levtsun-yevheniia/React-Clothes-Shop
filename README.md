@@ -1,6 +1,10 @@
 <h1 align="center">React Web Application for an Online Clothing Store</h1><br>
+
+<strong> You can check this project in real life here: http://yourstylishontario.infinityfreeapp.com </strong> <br> <br>
+
 <strong> Introduction: </strong> <br>
-This is a full-fledged React web application created using a variety of technologies that  make it convenient, beautiful and functional.
+This is a full-fledged React web application created using a variety of technologies that make it convenient, beautiful and functional.
+
 <h2> Key Features: </h2>
 <ul>
   &#9989; Convenient and intuitive interface<br>
@@ -12,8 +16,11 @@ This is a full-fledged React web application created using a variety of technolo
   &#9989; Global data store for the entire application<br>
   &#9989; Storing filtering parameter data in the URL for user convenience<br>
   &#9989; The cart functionality is fully implemented<br>
+  &#9989; Storing data in local storage<br>
+  &#9989; Adaptive version<br>
+  
+  
 </ul>
-New features are on the way!<span style="font-size: 24px;">&#128640;</span>
 
 <h2>Technologies:</h2>
 <ul>
@@ -61,3 +68,13 @@ New features are on the way!<span style="font-size: 24px;">&#128640;</span>
 <strong> Cart Page: </strong> <br>
 
 ![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/fifth.jpg)<br>
+
+<strong> About Item Page: </strong> <br>
+
+![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/about_item.jpg)<br>
+
+<strong> Adaptive version: </strong> <br>
+
+![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/adaptive1.jpg)<br>
+
+![Image alt](https://github.com/levtsun-yevheniia/React-Clothes-Shop/raw/main/src/assets/screenshots/adaptive2.jpg)<br>
